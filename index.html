@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Love Letter to You</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Playfair+Display:wght@400;700&family=Great+Vibes&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Playfair Display', serif;
+            overflow-x: hidden;
+            height: 100vh;
+            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 25%, #fecfef 50%, #fad0c4 75%, #ffd1ff 100%);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
+            position: relative;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Floating Hearts */
+        .heart {
+            position: absolute;
+            width: 20px;
+            height: 18px;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .heart:before,
+        .heart:after {
+            content: '';
+            width: 10px;
+            height: 16px;
+            position: absolute;
+            left: 5px;
+            transform: rotate(-45deg);
+            background: rgba(255, 105, 180, 0.8);
+            border-radius: 10px 10px 0 0;
+            transform-origin: 0 100%;
+        }
+
+        .heart:after {
+            left: 0;
+            transform: rotate(45deg);
+            transform-origin: 100% 100%;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(-100vh) rotate(360deg); opacity: 0; }
+        }
+
+        /* Glowing Particles */
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.8) 0%, transparent 70%);
+            border-radius: 50%;
+            animation: sparkle 4s linear infinite;
+        }
+
+        @keyframes sparkle {
+            0% {
+                transform: scale(0) rotate(0deg);
+                opacity: 0;
+            }
+            50% {
+                opacity: 1;
+            }
+            100% {
+                transform: scale(1) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* Letter Container */
+        .letter-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+            position: relative;
+            z-index: 10;
+        }
+
+        .letter-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 30px;
+            padding: 60px 50px;
+            max-width: 800px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: 
+                0 25px 50px rgba(255, 182, 193, 0.4),
+                0 0 0 1px rgba(255, 255, 255, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.6);
+            position: relative;
+            border: 1px solid rgba(255, 182, 193, 0.3);
+            animation: cardReveal 1s ease-out 0.5s both;
+        }
+
+        @keyframes cardReveal {
+            from {
+                opacity: 0;
+                transform: translateY(50px) scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .letter-title {
+            font-family: 'Dancing Script', cursive;
+            font-size: 3.5em;
+            text-align: center;
+            color: #d63384;
+            margin-bottom: 40px;
+            text-shadow: 0 2px 10px rgba(214, 51, 132, 0.3);
+            animation: titleGlow 3s ease-in-out infinite alternate;
+        }
+
+        @keyframes titleGlow {
+            from { text-shadow: 0 2px 10px rgba(214, 51, 132, 0.3); }
+            to { text-shadow: 0 2px 20px rgba(214, 51, 132, 0.6), 0 0 30px rgba(255, 182, 193, 0.4); }
+        }
+
+        .letter-content {
+            font-size: 1.3em;
+            line-height: 1.8;
+            color: #4a4a4a;
+            text-align: justify;
+            position: relative;
+        }
+
+        .letter-line {
+            opacity: 0;
+            transform: translateX(-30px);
+            animation: fadeInLine 1.2s ease-out forwards;
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .letter-line:last-child {
+            margin-bottom: 0;
+        }
+
+        @keyframes fadeInLine {
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .signature {
+            font-family: 'Great Vibes', cursive;
+            font-size: 2.5em;
+            text-align: right;
+            color: #d63384;
+            margin-top: 40px;
+            text-shadow: 0 2px 10px rgba(214, 51, 132, 0.3);
+        }
+
+        /* Scrollbar */
+        .letter-card::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .letter-card::-webkit-scrollbar-track {
+            background: rgba(255, 182, 193, 0.2);
+            border-radius: 10px;
+        }
+
+        .letter-card::-webkit-scrollbar-thumb {
+            background: rgba(214, 51, 132, 0.6);
+            border-radius: 10px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .letter-title {
+                font-size: 2.5em;
+            }
+            .letter-card {
+                padding: 40px 30px;
+            }
+            .letter-content {
+                font-size: 1.1em;
+            }
+            .signature {
+                font-size: 2em;
+            }
+        }
+
+        /* Mobile optimization */
+        @media (max-width: 480px) {
+            .letter-content {
+                font-size: 1em;
+                line-height: 1.6;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Floating Hearts -->
+    <div class="hearts-container"></div>
+
+    <!-- Glowing Particles -->
+    <div class="particles-container"></div>
+
+    <div class="letter-container">
+        <div class="letter-card">
+            <h1 class="letter-title">To the girl I'm deeply in love with</h1>
+            <div class="letter-content">
+                <div class="letter-line" style="animation-delay: 0.8s;">So, I've been writing this message for a couple of days na, and I hope you know that I'm super serious, baby. I love you, baby, and I mean that with everything I have.</div>
+                <div class="letter-line" style="animation-delay: 1.6s;">It's been 148 days since we started talking, and honestly, I still want to get to know you more and more, baby. Every day I discover new things about you—yung mga small things na nakakakilig or nakakatuwa—and I just love it.</div>
+                <div class="letter-line" style="animation-delay: 2.4s;">I don't think I'll ever get tired of learning about you kasi lahat ng details about you matter to me, baby. I love you, baby, sobra.</div>
+                <div class="letter-line" style="animation-delay: 3.2s;">One thing I really look forward to is when the day finally slows down and I can get on the phone with my favorite person—us just talking about random stuff, laughing at everything, and yaping hanggang sa makatulog tayo.</div>
+                <div class="letter-line" style="animation-delay: 4.0s;">Sounds simple pero sa akin, those moments mean the world. Those are the parts of my day na parang everything feels calm and safe, baby. I love talking to you, I love hearing your voice, and I love feeling close to you kahit malayo tayo. I love you, baby, more than anything.</div>
+                <div class="letter-line" style="animation-delay: 4.8s;">I even made a little list of the things you like and don't like—just para ma-remember ko yung small details about you. It's like… you already got me. You already have my heart without even trying, baby. I love you, baby.</div>
+                <div class="letter-line" style="animation-delay: 5.6s;">Crying, struggling, scared, mad, upset? Baby, you're still my beautiful girl. Nothing will ever change that. I will always support you. You're perfect in your own way, and I don't ever want anyone else apart from you.</div>
+                <div class="letter-line" style="animation-delay: 6.4s;">You're honestly one of the best things that ever happened to me. You never fail to make me smile. I love you with all my heart, baby. I love you, baby, sobra.</div>
+                <div class="letter-line" style="animation-delay: 7.2s;">You deserve the world, baby, and I will never think otherwise. I really hope you have the happiest life ever kasi you deserve it so much. Never change for anyone—you're perfect the way you are. I love you, baby.</div>
+                <div class="letter-line" style="animation-delay: 8.0s;">And when we finally get to spend time together in person, I swear I won't wanna leave your side. Parang ayaw ko na umalis sa tabi mo kapag magkasama tayo, baby.</div>
+                <div class="letter-line" style="animation-delay: 8.8s;">I'd just wanna stay there with you, enjoying every second, kasi being close to you is something I've been dreaming about for so long. I love you, baby.</div>
+                <div class="letter-line" style="animation-delay: 9.6s;">Okay, but I need to be honest with you. For the past few days, I've been thinking a lot… overthinking talaga. Remember nung sabi ko I couldn't sleep? It wasn't just school. It's me thinking about us, about you, about everything.
+                </div>
+                <div class="letter-line" style="animation-delay: 10.4s;">And I noticed… parang paulit-ulit lang yung mga nangyayari between us—the same vibes, same messages, same situations happening again and again. Not in a bad way, pero it made me realize na I want to change that.</div>
+                <div class="letter-line" style="animation-delay: 11.2s;">I want us to grow, to talk more, to connect better, instead of feeling like we're stuck in a loop. I don't want our story to feel like a repeat—I want it to move forward with you, baby. I love you, baby, and I'm serious about us.</div>
+                <div class="letter-line" style="animation-delay: 12.0s;">Ayzel… am I losing you? If yes, please tell me and bear with me. I'm really serious about us. I know this LDR is hard sometimes, but I'll fight for us. And if I'm just overthinking, then I'm really sorry for assuming things.
+                
+                </div>
+                <div class="letter-line" style="animation-delay: 12.8s;">When you deactivated your account without telling me, I cried and overthought so much. Pero kahit ganun, I waited for you and kept updating you kasi I trusted na you had a reason.</div>
+                <div class="letter-line" style="animation-delay: 13.6s;">When you said you deactivated for peace of mind and that you're okay, I just wanted to know if you're really okay, baby… kasi I wondered why my baby needed that space and if I made you feel stressed.</div>
+                <div class="letter-line" style="animation-delay: 14.4s;">Baby, I need you to know this clearly: there is no other girl. There will never be anyone else. And if you ever think I'm playing you… baby, I swear I'm not. I am 100% serious about you, about us, and about our future.</div>
+                <div class="letter-line" style="animation-delay: 15.2s;">I love you, baby, more than words can ever explain. I introduced you to my family because I wanted them to know how serious I am about you, and how much you mean to me. You are worth every risk, baby.
+                .</div>
+                <div class="letter-line" style="animation-delay: 16.0s;">Even if we're LDR, I still choose you, baby. I try my best to show you love kahit mostly messages lang. I miss your voice. Seeing your posts or pictures is enough sometimes to remind me how lucky I am to have you.</div>
+                <div class="letter-line" style="animation-delay: 16.8s;">You're taking care of yourself, and that makes me proud, baby.</div>
+                <div class="letter-line" style="animation-delay: 17.6s;">I know I can be annoying and clingy sometimes, and I don't always know how to express myself. Pero I try my best to change for you and make you happy.</div>
+                <div class="letter-line" style="animation-delay: 18.4s;">Even kapag tired ako from school, I still choose to spend time with you kasi baby, ikaw ang pahinga. Kahit short lang yung usap natin, it still means the world.</div>
+                <div class="letter-line" style="animation-delay: 19.2s;">I just want you to know that you are worth every risk for me. Even if we're young, my feelings are real. I'll face anything as long as it means staying by your side.</div>
+                <div class="letter-line" style="animation-delay: 20.0s;">I wanna prove that you're my one and only, and no matter what, I'll always be here for you, baby. I love you, baby, and I mean it with all my heart.</div>
+                <div class="letter-line" style="animation-delay: 20.8s;">My love for you isn't temporary. It won't fade when things get hard. I'm willing to understand every part of you—moods, attitude, ups and downs. Even when things aren't easy, I won't walk away.</div>
+                <div class="letter-line" style="animation-delay: 21.6s;">I'm here for all moments, good or bad. If you fall apart, cry, feel lost, I'll still choose you every single time. </div>
+                <div class="letter-line" style="animation-delay: 22.4s;">And remember, you're never alone. No matter where life takes us, I will always choose you, love you, and believe in you with everything I have. That someone is me, baby. 
+                </div>
+                <div class="letter-line" style="animation-delay: 23.2s;">I don't know what the future looks like exactly, but as long as you're in it, I know it's worth it. 
+                </div>
+                <div class="letter-line" style="animation-delay: 24.0s;">So please stay, grow with me, laugh with me, and let me love you the way you deserve. At the end of the day, my heart will always find its way back to you, baby. </div>
+                <div class="letter-line" style="animation-delay: 24.8s;">And if the world ever gets too heavy, come back to me. My arms, my heart, my love—always a safe place for you, baby. I love you, baby, forever.</div>
+            </div>
+            <div class="signature" style="animation: signatureReveal 2s ease-out 25s both;">
+                Forever yours,
+                <br><strong>Your Baby</strong>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Create floating hearts
+        function createHearts() {
+            const container = document.querySelector('.hearts-container');
+            for (let i = 0; i < 20; i++) {
+                setTimeout(() => {
+                    const heart = document.createElement('div');
+                    heart.className = 'heart';
+                    heart.style.left = Math.random() * 100 + '%';
+                    heart.style.animationDuration = (Math.random() * 3 + 4) + 's';
+                    heart.style.animationDelay = Math.random() * 2 + 's';
+                    container.appendChild(heart);
+
+                    setTimeout(() => heart.remove(), 8000);
+                }, i * 300);
+            }
+        }
+
+        // Create glowing particles
+        function createParticles() {
+            const container = document.querySelector('.particles-container');
+            setInterval(() => {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.top = '100%';
+                particle.style.animationDuration = (Math.random() * 3 + 2) + 's';
+                container.appendChild(particle);
+
+                set
